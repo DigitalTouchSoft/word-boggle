@@ -5,15 +5,10 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
-import android.graphics.RectF;
-import android.graphics.Shader;
 import android.graphics.Typeface;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
@@ -159,25 +154,6 @@ public class BoardGamePiece extends ImageView {
 		
 		Rect d = new Rect(); 
 		super.getDrawingRect(d);
-		float[] roundedCorner = new float[] { 12, 12, 12, 12, 12, 12, 12, 12 };
-		float insetBuffer = (float) (d.width() *  0.20);
-		RectF inset = new RectF(insetBuffer, insetBuffer, insetBuffer, insetBuffer);
-		RoundRectShape rrs = new RoundRectShape(roundedCorner, inset, null);
-		ShapeDrawable roundRect = new ShapeDrawable(rrs);
-		roundRect.getPaint().setShader(
-				new LinearGradient(d.bottom, 
-									d.bottom, 
-									d.top, 
-									d.top, 
-									new int[] { 
-										CustomColors.BoardGamePieceColor.GRADIENT_TOP,
-										CustomColors.BoardGamePieceColor.GRADIENT_BOTTOM } , 
-									null, 
-									Shader.TileMode.MIRROR));
-
-		roundRect.setBounds(d );
-		roundRect.setPadding(3, 3, 3, 3);
-		roundRect.draw(canvas);
 
 		mX = d.exactCenterX();
 		mY = d.exactCenterY();

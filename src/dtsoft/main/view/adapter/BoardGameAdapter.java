@@ -63,7 +63,7 @@ public class BoardGameAdapter {
 									GAME_PIECE_PADDING, 
 									GAME_PIECE_PADDING, 
 									GAME_PIECE_PADDING);
-				//bgPiece.setImageResource(R.drawable.boardgamepiece);
+				bgPiece.setImageResource(R.drawable.boardgamepiece);
 				TableRow.LayoutParams lp = new TableRow.LayoutParams (mGamePieceDimension,mGamePieceDimension);
 				bgPiece.setLayoutParams(lp);
 				bgPiece.setClickable(true);
