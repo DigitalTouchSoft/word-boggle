@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_text">
+		WordBoggle! A game with never ending fun...well maybe not, but it is definitely a classic!
+		\n\nMatch touching tiles up-and-down or left-and-right to create words.
+		\n\nSit back and relax as your literacy skills wow your friends!  Rack up the points and show them why you are the WordBoggle master! 
+		\n
+	</string>
+	<string name="point_values">
+10   points: E, A, I, O, N, R, T, L, S, U\n20   points: D, G\n30   points: B, C, M, P\n40   points: F, H, V, W, Y\n50   points: K\n80   points: J, X\n100 points: Q, Z\n</string>
+	<string name="dedication_text">
+		This game is dedicated to my family and friends who both put up with me and help me out along the way!\n
+	</string>
+	<string name="copyright_text">Copyright © Digital Touch Soft, 2010
+	</string>
+	<string name="app_name">WordBoggle!</string>
+</resources>

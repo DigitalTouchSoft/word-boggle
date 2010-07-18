@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:background="@drawable/backgroundgradient">
+	<ScrollView
+		android:id="@+id/GameBoardLayout"
+		android:layout_below="@+id/ScoreBoard"
+		android:layout_alignParentLeft="true"
+		android:layout_above="@+id/WordTracker"
+		android:layout_height="fill_parent"
+		android:layout_width="fill_parent">
+		<TableLayout
+			android:id="@+id/GameBoard"
+			android:gravity="center"
+			android:layout_height="fill_parent"
+			android:layout_width="fill_parent" />
+	</ScrollView>
+	<TextView
+		android:id="@+id/ScoreBoard"
+		android:layout_width="fill_parent"
+		android:editable="false"
+		android:text="0"
+		android:gravity="center"
+		android:layout_height="wrap_content"
+		android:textColor="#000000"
+		android:background="@drawable/scoreboard"/>
+	<TextView
+		android:layout_height="wrap_content"
+		android:id="@+id/WordTracker"
+		android:layout_width="fill_parent"
+		android:gravity="center"
+		android:layout_toLeftOf="@+id/CancelWord"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:clickable="true"
+		android:textColor="#000000"
+		android:background="@drawable/scoreboard" />
+	<Button
+		android:layout_height="wrap_content"
+		android:id="@+id/CancelWord"
+		android:text="Cancel Selection"
+		android:layout_alignParentBottom="true"
+		android:layout_width="wrap_content"
+		android:layout_toLeftOf="@+id/NewGame"
+		android:layout_alignParentRight="true" android:background="@drawable/button" android:textColor="#FFFFFFFF"/>
+</RelativeLayout>
