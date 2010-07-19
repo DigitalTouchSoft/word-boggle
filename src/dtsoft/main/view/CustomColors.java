@@ -1,17 +1,29 @@
 package dtsoft.main.view;
 
 public class CustomColors {
-	public class BoardGamePieceColor {
+	public class GamePieceColor {
 		
-		// Board Game Piece Colors
-		public static final int BORDER = 0x000000000;
-		public static final int GRADIENT_TOP = 0xFF336699;
-		public static final int GRADIENT_BOTTOM = 0xFF93B7DB;
+		public class Normal {
+			// Board Game Piece Colors
+			public static final int GRADIENT_TOP = 0xFF336699;
+			public static final int GRADIENT_BOTTOM = 0xFF93B7DB;
+		}
 		
-		// Draw the Inset Colors
+		public class Highlight {
+			// Board Game Piece Colors
+			public static final int GRADIENT_TOP = 0xFFFFA76D;
+			public static final int GRADIENT_BOTTOM = 0xFFCC5100;
+		}
+		
+		public class Clicked {
+			// Board Game Piece Colors
+			public static final int GRADIENT_TOP = 0xFF6BB7FF;
+			public static final int GRADIENT_BOTTOM = 0xFF0069CC;
+		}
+		
 		public class Inset {
-			public static final int GRADIENT_TOP = 0xFFFFFFFF;
-			public static final int GRADIENT_BOTTOM = 0xFFE7E7E7;
+			public static final int GRADIENT_TOP = 0xFFD7D7D7;
+			public static final int GRADIENT_BOTTOM = 0xFFF6F6F6;
 		}
 	}
 }

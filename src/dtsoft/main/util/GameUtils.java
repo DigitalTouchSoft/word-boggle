@@ -7,7 +7,7 @@ import dtsoft.main.view.adapter.BoardGameAdapter;
 
 
 public class GameUtils {
-	private final int mGameCols = 5;
+	private final int mGameCols = 4;
 	
 	private static GameUtils mThis = null;
 	

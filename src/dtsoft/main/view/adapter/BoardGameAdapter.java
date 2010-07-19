@@ -22,7 +22,7 @@ public class BoardGameAdapter {
 		mContext = context;
 		
 		mGamePieceDimension = ((WordBoggle)mContext).getWindowManager().getDefaultDisplay().getWidth();
-		mGamePieceDimension = mGamePieceDimension / 5;
+		mGamePieceDimension = mGamePieceDimension / GameUtils.getInstance().getGameCols();
 		
 		this.buildGameBoard();
 	}

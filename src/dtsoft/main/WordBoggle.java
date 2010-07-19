@@ -41,6 +41,7 @@ public class WordBoggle extends Activity {
 	// Activities 
 	private static final int WORD_LIST_ACTIVITY = 0;
 	private static final int ABOUT_INFO_ACTIVITY = 1;
+	private static final int SETTINGS_ACTIVITY = 2;
 	
 	// Dialogs 
 	private static final int NEW_GAME_DIALOG = 0;
@@ -112,17 +113,17 @@ public class WordBoggle extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem //settings,
+		MenuItem settings,
 				newGame,
 				currentWords,
 				about; 
 		
-		//settings = menu.add(0, SETTINGS_MENU_ITEM, 3, "Settings");
+		settings = menu.add(0, SETTINGS_MENU_ITEM, 3, "Settings");
 		newGame = menu.add(0, NEW_GAME_MENU_ITEM, 2, "New Game");
 		currentWords = menu.add(0, WORD_LIST_MENU_ITEM, 1, "Words Found");
 		about = menu.add(0, ABOUT_MENU_ITEM, 4, "About");
 		
-		//settings.setIcon(R.drawable.ic_menu_preferences);
+		settings.setIcon(R.drawable.ic_menu_preferences);
 		newGame.setIcon(R.drawable.ic_menu_add);
 		currentWords.setIcon(R.drawable.ic_menu_sort_alphabetically);
 		about.setIcon(R.drawable.ic_menu_info_details);
@@ -137,6 +138,7 @@ public class WordBoggle extends Activity {
 			this.getDialog(NEW_GAME_DIALOG);
 			break;
 		case SETTINGS_MENU_ITEM:
+			startActivity(SETTINGS_ACTIVITY);
 			break;
 		case WORD_LIST_MENU_ITEM:
 			WordDatabase.WORDS_FOUND = this.getWordsInBank();
@@ -159,6 +161,8 @@ public class WordBoggle extends Activity {
 		case ABOUT_INFO_ACTIVITY:
 			newActivity = new Intent(this, AboutInfo.class);
 			break;
+		case SETTINGS_ACTIVITY:
+			newActivity = new Intent(this, Settings.class);
 			default:
 				newActivity = new Intent();
 		}
