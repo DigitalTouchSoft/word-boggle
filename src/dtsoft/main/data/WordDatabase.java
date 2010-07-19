@@ -23,7 +23,17 @@ public class WordDatabase {
 	private HashMap<String, Boolean> mInCache;
 	private HashMap<String, Integer> mWordListByLetter;
 	
-	
+	public void destroy() {
+		mShortWords.clear();
+		mLongWords.clear();
+		mInCache.clear();
+		mWordListByLetter.clear();
+		
+		mShortWords = null;
+		mLongWords = null;
+		mInCache = null;
+		mWordListByLetter = null;
+	}
 	public WordDatabase(Context context) {
 		mContext = context;
 		mShortWords = new ArrayList<String>();

@@ -83,4 +83,8 @@ public class BoardGameAdapter {
 			gameBoard.addView(tableRow);
 		}
 	}
+	
+	public void destroy() {
+		
+	}
 }

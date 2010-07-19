@@ -175,7 +175,7 @@ public class BoardGamePiece extends ImageView {
 			mGamePieceGloss.setBounds(r.left, r.top, r.right, r.bottom /2);
 			mGamePieceGloss.getPaint().setColor(0x44FFFFFF);
 		}
-		
+
 		LinearGradient background = new LinearGradient(0, 0, 0, d.height(), color0, color1, TileMode.MIRROR);
 		this.mGamePiece.getPaint().setShader(background);
 	}
@@ -244,6 +244,7 @@ public class BoardGamePiece extends ImageView {
 	}
 	
 	private void drawInsetBorder(InsetBounds bounds) {
+		float borderWidth = 1.25f;
 		Path left = new Path();
 		Path right = new Path();
 		Path top = new Path();
@@ -251,26 +252,26 @@ public class BoardGamePiece extends ImageView {
 		
 		left.moveTo(0, bounds.height);
 		left.lineTo(0, 0);
-		left.lineTo(1, 0);
-		left.lineTo(1, bounds.height);
+		left.lineTo(borderWidth, 0);
+		left.lineTo(borderWidth, bounds.height);
 		left.close();
 		
 		top.moveTo(0, 0);
 		top.lineTo(bounds.width, 0);
-		top.lineTo(bounds.width, 1);
-		top.lineTo(0,1);
+		top.lineTo(bounds.width, borderWidth);
+		top.lineTo(0,borderWidth);
 		top.close();
 		
 		right.moveTo(bounds.width,bounds.height);
 		right.lineTo(bounds.width, 0);
-		right.lineTo(bounds.height - 1, 0);
-		right.lineTo(bounds.height - 1, bounds.height);
+		right.lineTo(bounds.height - borderWidth, 0);
+		right.lineTo(bounds.height - borderWidth, bounds.height);
 		right.close();
 		
 		bottom.moveTo(0, mInset.getBounds().height());
 		bottom.lineTo(bounds.width,mInset.getBounds().height());
-		bottom.lineTo(bounds.width,mInset.getBounds().height() - 1);
-		bottom.lineTo(0, mInset.getBounds().height() - 1);
+		bottom.lineTo(bounds.width,mInset.getBounds().height() - borderWidth);
+		bottom.lineTo(0, mInset.getBounds().height() - borderWidth);
 		bottom.close();
 		
 		
@@ -327,10 +328,10 @@ public class BoardGamePiece extends ImageView {
 		}
 
 		mInset.draw(canvas);
-		mInsetLeft.draw(canvas);
 		mInsetRight.draw(canvas);
 		mInsetTop.draw(canvas);
 		mInsetBottom.draw(canvas);
+		mInsetLeft.draw(canvas);
 		mGamePiece.draw(canvas);
 		
 		if (mGamePieceGloss != null) {
@@ -356,12 +357,21 @@ public class BoardGamePiece extends ImageView {
 	public void recyle() {
 		mLetterPaint = null;
 		mScorePaint = null;
+		mInset = null;
+		mInsetBottom = null;
+		mInsetLeft = null;
+		mInsetRight = null;
+		mInsetTop = null;
+		mGamePiece = null;
+		mGamePieceGloss = null;
+		
 	}
 	
 	public void reset() {
 		mIsClicked = false;
 		mUnClickable = false;
 		mLetterPaint = null;
+		mScorePaint = null;
 		makeHighlight(false, true);
 		super.invalidate();
 	}

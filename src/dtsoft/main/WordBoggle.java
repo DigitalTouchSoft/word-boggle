@@ -104,7 +104,12 @@ public class WordBoggle extends Activity {
 				bgp.recyle();
 			}
 		}
-
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		mWordDatabase = null;
 	}
 	
 	public  void initWordBank() {
