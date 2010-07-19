@@ -9,7 +9,6 @@ import dtsoft.main.wordboggle.data.WordDatabase;
 public class WordsFoundList extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.wordlist);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);

@@ -152,7 +152,6 @@ public class WordBoggle extends Activity {
 		case ABOUT_MENU_ITEM:
 			startActivity(ABOUT_INFO_ACTIVITY);
 		}
-		// TODO Auto-generated method stub
 		return super.onOptionsItemSelected(item);
 	}
 	
