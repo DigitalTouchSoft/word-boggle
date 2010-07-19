@@ -118,9 +118,9 @@ public class WordBoggle extends Activity {
 				currentWords,
 				about; 
 		
-		settings = menu.add(0, SETTINGS_MENU_ITEM, 3, "Settings");
-		newGame = menu.add(0, NEW_GAME_MENU_ITEM, 2, "New Game");
 		currentWords = menu.add(0, WORD_LIST_MENU_ITEM, 1, "Words Found");
+		newGame = menu.add(0, NEW_GAME_MENU_ITEM, 2, "New Game");
+		settings = menu.add(0, SETTINGS_MENU_ITEM, 3, "Settings");
 		about = menu.add(0, ABOUT_MENU_ITEM, 4, "About");
 		
 		settings.setIcon(R.drawable.ic_menu_preferences);
@@ -162,7 +162,7 @@ public class WordBoggle extends Activity {
 			newActivity = new Intent(this, AboutInfo.class);
 			break;
 		case SETTINGS_ACTIVITY:
-			newActivity = new Intent(this, Settings.class);
+			newActivity = new Intent(this, GameSettings.class);
 			default:
 				newActivity = new Intent();
 		}
