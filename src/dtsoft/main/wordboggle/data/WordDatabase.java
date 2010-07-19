@@ -9,11 +9,16 @@ import java.util.HashMap;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.widget.ArrayAdapter;
 import dtsoft.main.wordboggle.R;
 
 public class WordDatabase {
 
+	private static final String DATABASE_NAME = "WORDS";
+	private static final int DATABASE_VERSION = 1;
 	public static ArrayAdapter<String> WORDS_FOUND;
 	
 	private Context mContext;
@@ -130,13 +135,23 @@ public class WordDatabase {
 	public static final String LARGE_WORD_TABLE = "large_word_table";
 	public static final String SMALL_WORD_TABLE = "small_word_table";
 	
-/*	private static class WordOpenHelper extends SQLiteOpenHelper {
-		private final Context mHelperContext;
-		private SQLiteDatabase mDatabase;
-		
-		private static final String FTS_TABLE_CREATE = 
-				"CREATE VIRTUAL TABLE " + FTS_DATABASE +
-				" USING fts3 (" + 
-				
-	}*/
+	private static class WordOpenHelper extends SQLiteOpenHelper {
+
+		public WordOpenHelper(Context context) {
+			super(context, DATABASE_NAME, null, DATABASE_VERSION);
+			// TODO Auto-generated constructor stub
+		}
+
+	
+
+		@Override
+		public void onCreate(SQLiteDatabase db) {
+			
+		}
+
+		@Override
+		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			// TODO Auto-generated method stub
+			
+		}}
 }
