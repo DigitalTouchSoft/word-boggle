@@ -1,16 +1,9 @@
 package dtsoft.main;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 public class GameSettings extends Activity {
-
-	private static final String SETTINGS_FILE = "settings.conf";
 
 	
 	@Override
