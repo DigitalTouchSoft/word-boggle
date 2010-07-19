@@ -1,4 +1,4 @@
-package dtsoft.main;
+package dtsoft.main.wordboggle;
 
 import android.app.Activity;
 import android.os.Bundle;

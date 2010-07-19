@@ -1,4 +1,4 @@
-package dtsoft.main.data.cache;
+package dtsoft.main.wordboggle.data.cache;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

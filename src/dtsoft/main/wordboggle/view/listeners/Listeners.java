@@ -1,4 +1,4 @@
-package dtsoft.main.view.listeners;
+package dtsoft.main.wordboggle.view.listeners;
 
 import android.content.Context;
 import android.view.MotionEvent;
@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import dtsoft.main.WordBoggle;
-import dtsoft.main.util.sound.AudioProvider;
-import dtsoft.main.view.BoardGamePiece;
+import dtsoft.main.wordboggle.WordBoggle;
+import dtsoft.main.wordboggle.util.sound.AudioProvider;
+import dtsoft.main.wordboggle.view.BoardGamePiece;
 
 public class Listeners {
 	

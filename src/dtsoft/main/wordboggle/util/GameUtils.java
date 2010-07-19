@@ -1,9 +1,9 @@
-package dtsoft.main.util;
+package dtsoft.main.wordboggle.util;
 
 import java.util.Random;
 
-import dtsoft.main.view.BoardGamePiece;
-import dtsoft.main.view.adapter.BoardGameAdapter;
+import dtsoft.main.wordboggle.view.BoardGamePiece;
+import dtsoft.main.wordboggle.view.adapter.BoardGameAdapter;
 
 
 public class GameUtils {
