@@ -1,11 +1,11 @@
-package dtsoft.main.wordboggle.util.sound;
+package dtsoft.main.util.sound;
 
 import java.util.HashMap;
 
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import dtsoft.main.wordboggle.R;
+import dtsoft.main.R;
 
 public class AudioProvider {
 	public static int BAD_WORD_SUBMITED = 0;

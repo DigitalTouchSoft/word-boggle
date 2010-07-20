@@ -1,4 +1,4 @@
-package dtsoft.main.wordboggle.data;
+package dtsoft.main.data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,9 +11,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.view.Window;
 import android.widget.ArrayAdapter;
-import dtsoft.main.wordboggle.R;
+import dtsoft.main.R;
+import dtsoft.main.WordBoggle;
 
 public class WordDatabase {
 
@@ -50,11 +51,13 @@ public class WordDatabase {
 	
 	private void loadWordList(String firstLetter) {
 		final Resources resources = mContext.getResources();
+
 		InputStream inputStream = resources.openRawResource(getWordListResourceByLetter(firstLetter));
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		try {
 			String word;
 			while ((word = reader.readLine()) != null) {
+				
 				int length = word.length();
 				if (length <= 6 && length >= 2) {
 					mShortWords.add(word.toLowerCase().trim());					
@@ -68,6 +71,10 @@ public class WordDatabase {
 		}
 		catch(IOException e) {
 			throw new RuntimeException(e);
+		} finally {
+			((WordBoggle)mContext).getWindow().setFeatureInt(Window.FEATURE_PROGRESS, 10000);
+			reader = null;
+			inputStream = null;
 		}
 	}
 	

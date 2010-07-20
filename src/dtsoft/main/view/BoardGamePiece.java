@@ -1,4 +1,4 @@
-package dtsoft.main.wordboggle.view;
+package dtsoft.main.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -7,13 +7,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Paint.Align;
 import android.graphics.Path;
 import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Typeface;
-import android.graphics.Paint.Align;
 import android.graphics.Shader.TileMode;
+import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.PathShape;
 import android.graphics.drawable.shapes.RectShape;
@@ -21,11 +21,11 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import dtsoft.main.wordboggle.R;
-import dtsoft.main.wordboggle.WordBoggle;
-import dtsoft.main.wordboggle.util.Alphas;
-import dtsoft.main.wordboggle.util.sound.AudioProvider;
-import dtsoft.main.wordboggle.view.CustomColors.GamePieceColor;
+import dtsoft.main.R;
+import dtsoft.main.WordBoggle;
+import dtsoft.main.util.Alphas;
+import dtsoft.main.util.sound.AudioProvider;
+import dtsoft.main.view.CustomColors.GamePieceColor;
 
 public class BoardGamePiece extends ImageView {
 	

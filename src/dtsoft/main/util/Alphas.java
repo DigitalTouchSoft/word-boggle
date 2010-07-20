@@ -1,4 +1,4 @@
-package dtsoft.main.wordboggle.util;
+package dtsoft.main.util;
 
 public class Alphas {
 	public static final String[] TRUE_ALPHAS = new String[] {

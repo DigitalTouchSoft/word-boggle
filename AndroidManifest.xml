@@ -3,7 +3,7 @@
 	android:versionCode="3"
 	android:versionName="1.2"
 	xmlns:android="http://schemas.android.com/apk/res/android"
-package="dtsoft.main.wordboggle">
+package="dtsoft.main">
 	<application
 		android:icon="@drawable/icon"
 		android:label="@string/app_name"

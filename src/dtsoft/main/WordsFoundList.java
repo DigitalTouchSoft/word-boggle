@@ -1,10 +1,10 @@
-package dtsoft.main.wordboggle;
+package dtsoft.main;
 
 import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.widget.ListView;
-import dtsoft.main.wordboggle.data.WordDatabase;
+import dtsoft.main.data.WordDatabase;
 
 public class WordsFoundList extends Activity {
 	@Override
@@ -20,3 +20,4 @@ public class WordsFoundList extends Activity {
 	}
 	
 }
+

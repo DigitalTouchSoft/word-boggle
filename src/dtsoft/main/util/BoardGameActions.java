@@ -1,11 +1,11 @@
-package dtsoft.main.wordboggle.util;
+package dtsoft.main.util;
 
 import java.util.ArrayList;
 
 import android.content.Context;
 import android.util.Log;
-import dtsoft.main.wordboggle.WordBoggle;
-import dtsoft.main.wordboggle.view.BoardGamePiece;
+import dtsoft.main.WordBoggle;
+import dtsoft.main.view.BoardGamePiece;
 
 public class BoardGameActions {
 	

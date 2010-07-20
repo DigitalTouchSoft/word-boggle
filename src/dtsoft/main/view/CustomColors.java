@@ -1,4 +1,4 @@
-package dtsoft.main.wordboggle.view;
+package dtsoft.main.view;
 
 public class CustomColors {
 	public class GamePieceColor {
