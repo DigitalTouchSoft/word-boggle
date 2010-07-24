@@ -1,5 +1,7 @@
 package dtsoft.main.view.listeners;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,15 +39,21 @@ public class Listeners {
 		return new OnClickListener() {
 			
 			public void onClick(View v) {
-				
 				WordBoggle wb = (WordBoggle)v.getContext();
 				String word;
 				word = wb.getWordTracker().getText().toString();
-				
 				int wordValue = wb.getBoardGameActions().getWordValue(wb.getWordTracker().getText().toString());
-			
-				if (wordValue > 0) {
-					// Bank the score
+	
+				// Only allow words that have not been selected already
+				boolean alreadyInList = false;
+				for (int i = 0; i < wb.getWordsInBank().getCount(); i++){
+					if (wb.getWordsInBank().getItem(i).split("\t-\t")[0].equalsIgnoreCase(word)) {
+						alreadyInList = true;
+						break;
+					}
+				}
+				
+				if (wordValue > 0 && !alreadyInList) {
 					String curScore = wb.getScoreBoard().getText().toString();
 					int score = Integer.parseInt(curScore);
 					score += wordValue;

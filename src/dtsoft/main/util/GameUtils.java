@@ -2,60 +2,79 @@ package dtsoft.main.util;
 
 import java.util.Random;
 
+import dtsoft.main.data.cache.SettingsCache.Settings;
 import dtsoft.main.view.BoardGamePiece;
 import dtsoft.main.view.adapter.BoardGameAdapter;
 
 
 public class GameUtils {
-	private final int mGameCols = 4;
-	
-	private static GameUtils mThis = null;
-	
-	public static GameUtils getInstance() {
-		if (mThis == null) {
-			mThis =  new GameUtils();
-		} 
-		
-		return mThis;
-	}
-	
-	public GameUtils() {
+	private Settings mSettings;
+	public GameUtils(Settings settings) {
 		mRand = new Random();
+		mSettings = settings;
 	}
 	
 	public int getGameCols() {
-		return mGameCols;
+		return mSettings.gameColumns;
 	}
-
 	public int getGamePieces() {
-		return (int)Math.pow(getGameCols(), 2);
+		return (int) Math.pow(mSettings.gameColumns, 2);
 	}
-
+	
+	
 	public  int[] activateGamePieces(int gamePiece) {
-		int above,
+		int top,
 			right,
 			bottom,
-			left;
+			left,
+			topRight,
+			topLeft,
+			bottomRight,
+			bottomLeft;
 		
 		// Determine what is above
-		above = (gamePiece - mGameCols);
+		top = (gamePiece - getGameCols());
+		topRight = top + 1;
+		topLeft = top - 1;
+		
+		if ((topLeft - (getGameCols() - 1)) % getGameCols() == 0)
+			topLeft = -1;
+		if (topRight % getGameCols() == 0)
+			topRight = -1;
 		
 		// Determine what is to the right
 		right = (gamePiece + 1);
-		if (right % mGameCols == 0) {
+		if (right % getGameCols() == 0) {
 			// a left most piece
 			right = -1;
 		}
 		
 		// Determine what is so the bottom
-		bottom = (gamePiece + mGameCols);
+		bottom = (gamePiece + getGameCols());
+		bottomLeft = bottom - 1;
+		bottomRight = bottom + 1;
+		
+		if ((bottomLeft - (getGameCols() - 1)) % getGameCols() == 0 )
+			bottomLeft = -1;
+		if (bottomRight % getGameCols() == 0)
+			bottomRight = -1;
 		
 		// Determine what is to the left
 		left = (gamePiece - 1);
-		if (gamePiece % mGameCols == 0) {
+		if (gamePiece % getGameCols() == 0) {
 			left = -1;
 		}
-		return new int[] {above, right, bottom, left};
+		int[] results = new int[8];
+		results[GamePieceCoord.GP_BOTTOM] = bottom;
+		results[GamePieceCoord.GP_BOTTOM_LEFT] = bottomLeft;
+		results[GamePieceCoord.GP_BOTTOM_RIGHT] = bottomRight;
+		results[GamePieceCoord.GP_TOP] = top;
+		results[GamePieceCoord.GP_TOP_RIGHT] = topRight;
+		results[GamePieceCoord.GP_TOP_LEFT] = topLeft;
+		results[GamePieceCoord.GP_RIGHT] = right;
+		results[GamePieceCoord.GP_LEFT] = left;
+		
+		return results;
 	}
 	
 	public  int[] deactivateGamePieces(int[] activeGamePieces, int gamePiece, int totGamePieces) {
@@ -194,5 +213,9 @@ public class GameUtils {
 		public static final int GP_RIGHT = 1;
 		public static final int GP_BOTTOM = 2;
 		public static final int GP_LEFT = 3;
+		public static final int GP_TOP_LEFT = 4;
+		public static final int GP_TOP_RIGHT = 5;
+		public static final int GP_BOTTOM_LEFT = 6;
+		public static final int GP_BOTTOM_RIGHT = 7;
 	}
 }

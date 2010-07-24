@@ -1,5 +1,6 @@
 package dtsoft.main;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -15,7 +16,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import dtsoft.main.data.WordDatabase;
+import dtsoft.main.data.cache.SettingsCache;
 import dtsoft.main.util.BoardGameActions;
+import dtsoft.main.util.GameUtils;
 import dtsoft.main.util.sound.AudioProvider;
 import dtsoft.main.view.BoardGamePiece;
 import dtsoft.main.view.adapter.BoardGameAdapter;
@@ -31,6 +34,7 @@ public class WordBoggle extends Activity {
 	private WordDatabase mWordDatabase;
 	private ArrayAdapter<String> mWordsInBank;
 	private AudioProvider mAudioProvider;
+	private GameUtils mGameUtils;
 
 	// Menus
 	private static final int WORD_LIST_MENU_ITEM = Menu.FIRST;
@@ -57,22 +61,23 @@ public class WordBoggle extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.main);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        this.initSettings();
         this.init();
     }    
     
-	public void init() { 
-        //mGameBoard = (TableLayout) findViewById(R.id.GameBoard);
+    /** 
+     * is called part of onCreate() to setup the required components. 
+     */
+	public void init() {
         mCancelWord = (Button) findViewById(R.id.CancelWord);
         mScoreBoard = (TextView) findViewById(R.id.ScoreBoard);
         
     	mWordDatabase = new WordDatabase(this);
-    	mBoardGameActions = new BoardGameActions(this);
 
-    	mBoardGameAdapter = new BoardGameAdapter(this);
-    	mBoardGameAdapter.validateGameBoard();
-    	
+    	initBoardGame();
     	initWordBank();
     	
         mCancelWord.setOnClickListener(Listeners.getInstance().cancelWordClick());
@@ -83,18 +88,36 @@ public class WordBoggle extends Activity {
         mScoreBoard.setText("0");
 	}
 	
+	private void initSettings() {
+		SettingsCache sc = new SettingsCache(super.getCacheDir().getPath() + File.pathSeparator + SettingsCache.SETTINGS_FILE);
+		mGameUtils = new GameUtils(sc.getSettings());
+		sc = null;
+	}
+	
+	public void initBoardGame() {
+		mBoardGameActions = null;
+		mBoardGameAdapter = null;
+		
+		mBoardGameAdapter = new BoardGameAdapter(this);
+		mBoardGameActions = new BoardGameActions(this);
+		mBoardGameAdapter.validateGameBoard();
+	}
+	
 	@Override
 	protected void onResume() {
 		super.onResume();
+		this.initSettings();
 		mAudioProvider = new AudioProvider(this);
+		mWordDatabase = new WordDatabase(this);
 	}
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
 		
-		this.mAudioProvider.destroy();
 		this.mAudioProvider = null;
+		this.mWordDatabase = null;
+		this.mGameUtils = null;
 		
 		int totalItems = this.mBoardGameAdapter.getCount();
 		for (int i = 0; i < totalItems; i++) {
@@ -104,12 +127,6 @@ public class WordBoggle extends Activity {
 				bgp.recyle();
 			}
 		}
-	}
-	
-	@Override
-	protected void onStop() {
-		super.onStop();
-		mWordDatabase = null;
 	}
 	
 	public  void initWordBank() {
@@ -167,6 +184,7 @@ public class WordBoggle extends Activity {
 			break;
 		case SETTINGS_ACTIVITY:
 			newActivity = new Intent(this, GameSettings.class);
+			break;
 			default:
 				newActivity = new Intent();
 		}
@@ -221,13 +239,18 @@ public class WordBoggle extends Activity {
 	public AudioProvider getAudioProvider() {
 		return mAudioProvider;
 	}
+	public GameUtils getGameUtils() {
+		return mGameUtils;
+	}
 	
 	public class DialogListeners {
 		public DialogInterface.OnClickListener newGameClick() {
 
 			return new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int which) {
-					getBoardGameActions().resetGameBoard(true, false);
+					
+					// Destroy the current board
+					initBoardGame();
 					getScoreBoard().setText("0");
 					getWordsInBank().clear();
 				}

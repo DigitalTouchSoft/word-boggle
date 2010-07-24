@@ -39,7 +39,9 @@ package="dtsoft.main">
 		<activity
 			android:screenOrientation="portrait"
 			android:name=".AboutInfo" />
-	</application>
+	
+<activity android:name=".GameSettings" android:screenOrientation="portrait"></activity>
+</application>
 	<uses-sdk
 		android:minSdkVersion="7"
 	></uses-sdk>

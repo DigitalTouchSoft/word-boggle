@@ -23,17 +23,8 @@ public class BoardGameActions {
     	// Empty the word tracker
     	mContext.getWordTracker().setText("");
     	
-    	if (fromScore) {
-    		for(int i : mAlreadyClicked) {
-        		BoardGamePiece bgp = (BoardGamePiece)mContext.getGameBoard().getChildAt(i);
-        		if (bgp != null) {
-        			GameUtils.getInstance().getLetter(bgp);
-        		}
-    		}
-    	}
-    	
     	if (newLetters) {
-    		GameUtils.getInstance().gameBoardValidation(mContext.getGameBoard());
+    		mContext.getGameUtils().gameBoardValidation(mContext.getGameBoard());
     	}
     	
     	mAlreadyClicked = new ArrayList<Integer>();
@@ -48,14 +39,15 @@ public class BoardGameActions {
     		if (bgp != null) {
     			bgp.reset();
 				if (newLetters) {
-					GameUtils.getInstance().getLetter(bgp);
+					mContext.getGameUtils().getLetter(bgp);
 				}
     		}
     	}
 	}
 	
     public void highlightOtherGamePieces(int boardGamePieceId) {
-    	int[] boardGamePieceIds = GameUtils.getInstance().activateGamePieces(boardGamePieceId); 
+    	int[] boardGamePieceIds = mContext.getGameUtils().activateGamePieces(boardGamePieceId); 
+ 
     	// Call the highlight functions on the int id's
     	for (int i : boardGamePieceIds) {
 			BoardGamePiece bgp = (BoardGamePiece)mContext.getGameBoard().getChildAt(i);
@@ -68,9 +60,9 @@ public class BoardGameActions {
     } 
     
     private void deactivateOtherGamePieces(int[] activeBoardPieces, int boardGamePieceId) {
-    	int[] boardGamePieceIds = GameUtils.getInstance().deactivateGamePieces(activeBoardPieces, 
+    	int[] boardGamePieceIds = mContext.getGameUtils().deactivateGamePieces(activeBoardPieces, 
     																			boardGamePieceId, 
-    																			GameUtils.getInstance().getGamePieces()); 
+    																			mContext.getGameUtils().getGamePieces()); 
     	// call de-activate function on the int id's
     	for (int i : boardGamePieceIds) {
     			BoardGamePiece bgp = (BoardGamePiece)mContext.getGameBoard().getChildAt(i);

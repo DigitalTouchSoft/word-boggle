@@ -12,17 +12,20 @@ import dtsoft.main.util.GameUtils;
 import dtsoft.main.view.BoardGamePiece;
 
 public class BoardGameAdapter {
-	private Context mContext;
-	private BoardGamePiece[] mBoardGamePieces = new BoardGamePiece[GameUtils.getInstance().getGamePieces()];
-	private TableRow[] mTableRows = new TableRow[GameUtils.getInstance().getGameCols()];
+	private WordBoggle mContext;
+	private BoardGamePiece[] mBoardGamePieces;
+	private TableRow[] mTableRows;
 	private int mGamePieceDimension = 0;
 	private static int GAME_PIECE_PADDING = 3;
 	
 	public BoardGameAdapter(Context context) {
-		mContext = context;
+		mContext = (WordBoggle)context;
 		
+		mBoardGamePieces = new BoardGamePiece[mContext.getGameUtils().getGamePieces()];
+		mTableRows = new TableRow[mContext.getGameUtils().getGameCols()];
+
 		mGamePieceDimension = ((WordBoggle)mContext).getWindowManager().getDefaultDisplay().getWidth();
-		mGamePieceDimension = mGamePieceDimension / GameUtils.getInstance().getGameCols();
+		mGamePieceDimension = mGamePieceDimension / mContext.getGameUtils().getGameCols();
 		
 		this.buildGameBoard();
 	}
@@ -38,7 +41,7 @@ public class BoardGameAdapter {
 	}
 
 	public void validateGameBoard() {
-		GameUtils.getInstance().gameBoardValidation(this);
+		mContext.getGameUtils().gameBoardValidation(this);
 	}
 	
 	public BoardGamePiece[] getBoardGamePieces() {
@@ -47,6 +50,8 @@ public class BoardGameAdapter {
 
 	private void buildGameBoard() {
 		TableLayout gameBoard = (TableLayout)((WordBoggle)mContext).findViewById(R.id.GameBoard);
+		// Clean the game board of course
+		gameBoard.removeAllViews();
 		
 		int bgpId = 0;
 		for (int rowId = 0; rowId < mTableRows.length; rowId++) {
@@ -68,14 +73,14 @@ public class BoardGameAdapter {
 				bgPiece.setLayoutParams(lp);
 				bgPiece.setClickable(true);
 				bgPiece.setScaleType(ScaleType.FIT_CENTER);
-				GameUtils.getInstance().getLetter(bgPiece);
+				mContext.getGameUtils().getLetter(bgPiece);
 				this.mBoardGamePieces[bgp] = bgPiece;
 				
 				// Add it to the table row
 				tableRow.addView(bgPiece);
 				
-				if (bgp == (GameUtils.getInstance().getGameCols() - 1) ||
-						((bgp - (GameUtils.getInstance().getGameCols() - 1)) % GameUtils.getInstance().getGameCols()) == 0)
+				if (bgp == (mContext.getGameUtils().getGameCols() - 1) ||
+						((bgp - (mContext.getGameUtils().getGameCols() - 1)) % mContext.getGameUtils().getGameCols()) == 0)
 					break;
 			}
 			mTableRows[rowId] = tableRow;

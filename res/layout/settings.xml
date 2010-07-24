@@ -1,10 +1,81 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
+<RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/settings"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
-	android:background="@drawable/backgroundgradient" android:orientation="vertical">
+	android:background="@drawable/backgroundgradient">
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Game Board Size"
+		android:textColor="#FFFFFFFF"
+		android:textStyle="bold"
+		android:id="@+id/GameBoardOptions"
+		android:textSize="18dp"></TextView>
+	<ImageView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:src="@drawable/four_by_four_game_board"
+		android:layout_alignParentLeft="true"
+		android:scaleType="centerInside"
+		android:clickable="true"
+		android:id="@+id/FourByFour"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/GameBoardOptions"></ImageView>
+	<ImageView
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:src="@drawable/five_by_five_game_board"
+		android:scaleType="centerInside"
+		android:clickable="true"
+		android:id="@+id/FiveByFive"
+		android:layout_below="@+id/GameBoardOptions"
+		android:layout_toRightOf="@+id/FourByFour"></ImageView>
+	<View
+		android:layout_below="@+id/FourByFour"
+		android:layout_centerHorizontal="true"
+		android:id="@+id/ruler1"
+		android:layout_width="fill_parent"
+		android:layout_height="2dp"
+		android:background="#AACCCCCC"
+		android:layout_marginTop="10dp"></View>
+	<TextView
+		android:id="@+id/TextView01"
+		android:layout_centerHorizontal="true"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_below="@+id/ruler1"
+		android:layout_alignParentLeft="true"
+		android:text="Game Play Style"
+		android:textColor="#FFFFFFFF"
+		android:textStyle="bold"
+		android:textSize="18dp"></TextView>
+	<ImageView
+		android:layout_below="@+id/TextView01"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:id="@+id/ClassicGameMode"
+		android:clickable="true"
+		android:src="@drawable/classic_mode"></ImageView>
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:text="Apply"
+		android:id="@+id/SettingsApply" android:layout_width="100dp"></Button>
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:text="Cancel"
+		android:id="@+id/SettingsCancel" android:layout_width="100dp"></Button>
+	<ImageView
+		android:layout_toRightOf="@+id/ClassicGameMode"
+		android:layout_below="@+id/TextView01"
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:id="@+id/FreeStyleGameMode"
+		android:clickable="true"
+		android:src="@drawable/free_mode"></ImageView>
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -153,6 +153,8 @@ public class WordDatabase {
 
 		@Override
 		public void onCreate(SQLiteDatabase db) {
+//			db.execSQL("CREATE TABLE " + SMALL_WORD_TABLE + " ("
+//					+ 
 			
 		}
 
