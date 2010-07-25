@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import dtsoft.main.data.WordDatabase;
+import dtsoft.main.data.WordsDataHelper;
 
 public class WordsFoundList extends Activity {
 	@Override
@@ -17,8 +17,8 @@ public class WordsFoundList extends Activity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         
         ListView lv = (ListView) findViewById(R.id.WordBank);
-        if (WordDatabase.WORDS_FOUND != null) {
-        	lv.setAdapter(WordDatabase.WORDS_FOUND);
+        if (WordsDataHelper.WORDS_FOUND != null) {
+        	lv.setAdapter(WordsDataHelper.WORDS_FOUND);
         }
         
         ((Button)findViewById(R.id.WordListBack)).setOnClickListener(new OnClickListener() {

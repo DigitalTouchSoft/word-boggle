@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import dtsoft.main.data.WordDatabase;
+import dtsoft.main.data.WordsDataHelper;
 import dtsoft.main.data.cache.SettingsCache;
 import dtsoft.main.util.BoardGameActions;
 import dtsoft.main.util.GameUtils;
@@ -31,7 +31,7 @@ public class WordBoggle extends Activity {
 	private TextView mScoreBoard;
 	private TextView mWordTracker;
 	private BoardGameActions mBoardGameActions;
-	private WordDatabase mWordDatabase;
+	private WordsDataHelper mWordDatabase;
 	private ArrayAdapter<String> mWordsInBank;
 	private AudioProvider mAudioProvider;
 	private GameUtils mGameUtils;
@@ -75,7 +75,7 @@ public class WordBoggle extends Activity {
         mCancelWord = (Button) findViewById(R.id.CancelWord);
         mScoreBoard = (TextView) findViewById(R.id.ScoreBoard);
         
-    	mWordDatabase = new WordDatabase(this);
+    	mWordDatabase = new WordsDataHelper(this);
 
     	initBoardGame();
     	initWordBank();
@@ -108,7 +108,7 @@ public class WordBoggle extends Activity {
 		super.onResume();
 		this.initSettings();
 		mAudioProvider = new AudioProvider(this);
-		mWordDatabase = new WordDatabase(this);
+		mWordDatabase = new WordsDataHelper(this);
 	}
 	
 	@Override
@@ -163,7 +163,7 @@ public class WordBoggle extends Activity {
 			startActivity(SETTINGS_ACTIVITY);
 			break;
 		case WORD_LIST_MENU_ITEM:
-			WordDatabase.WORDS_FOUND = this.getWordsInBank();
+			WordsDataHelper.WORDS_FOUND = this.getWordsInBank();
 			startActivity(WORD_LIST_ACTIVITY);
 			break;
 		case ABOUT_MENU_ITEM:
@@ -224,7 +224,7 @@ public class WordBoggle extends Activity {
 		return mBoardGameAdapter;
 	}
 	
-	public WordDatabase getWordDatabase() {
+	public WordsDataHelper getWordDatabase() {
 		return mWordDatabase;
 	}
 	
