@@ -1,11 +1,11 @@
 package dtsoft.main;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,24 +14,32 @@ import dtsoft.main.data.cache.SettingsCache;
 
 public class GameSettings extends Activity {
 	
-	private SettingsCache mGameSettings;
+	private SharedPreferences mGameSettings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		super.setContentView(R.layout.settings);
 		
-		// Get a copy of the settings
-		mGameSettings = new SettingsCache(super.getCacheDir().getPath() + File.pathSeparator + SettingsCache.SETTINGS_FILE);
+		mGameSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+		
+		// Setup the settings for the first time
+		if (!mGameSettings .contains(SettingsCache.GAME_COLUMNS)) {
+			mGameSettings.edit().putInt(SettingsCache.GAME_COLUMNS, SettingsCache.GameCols.fourbyfour).commit();
+		}
+		
+		if (!mGameSettings .contains(SettingsCache.FREE_MODE)) {
+			mGameSettings.edit().putBoolean(SettingsCache.FREE_MODE, SettingsCache.GameMode.classic).commit();
+		}
 		
 		
 		// Read the settings and configure the display 
-		if (mGameSettings.getSettings().freeMode)
+		if (mGameSettings.getBoolean(SettingsCache.FREE_MODE, false))
 			((ImageView)findViewById(R.id.ClassicGameMode)).setAlpha(0x4B);
 		else 
 			((ImageView)findViewById(R.id.FreeStyleGameMode)).setAlpha(0x4B);
 		
-		if (mGameSettings.getSettings().gameColumns == 4)
+		if (mGameSettings.getInt(SettingsCache.GAME_COLUMNS, 4) == 4)
 			((ImageView)findViewById(R.id.FiveByFive)).setAlpha(0x4B);
 		else 
 			((ImageView)findViewById(R.id.FourByFour)).setAlpha(0x4B);
@@ -45,14 +53,7 @@ public class GameSettings extends Activity {
 				saveSettingsAndFinish();
 			}
 		});
-		((Button)findViewById(R.id.SettingsCancel)).setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				cancelAndFinish();
-			}
-		});		
-		
+
 		// Handlers for the 4x4 and 5x5 game boards
 		((ImageView)findViewById(R.id.FourByFour)).setOnClickListener(new OnClickListener() {
 			
@@ -61,7 +62,7 @@ public class GameSettings extends Activity {
 				((ImageView)v).setAlpha(0xFF);
 				((ImageView)findViewById(R.id.FiveByFive)).setAlpha(0x4B);
 				
-				mGameSettings.getSettings().gameColumns = 4;
+				mGameSettings.edit().putInt(SettingsCache.GAME_COLUMNS, SettingsCache.GameCols.fourbyfour).commit();
 			}
 		});
 		((ImageView)findViewById(R.id.FiveByFive)).setOnClickListener(new OnClickListener() {
@@ -71,7 +72,7 @@ public class GameSettings extends Activity {
 				((ImageView)v).setAlpha(0xFF);
 				((ImageView)findViewById(R.id.FourByFour)).setAlpha(0x4B);
 				
-				mGameSettings.getSettings().gameColumns = 5;
+				mGameSettings.edit().putInt(SettingsCache.GAME_COLUMNS, SettingsCache.GameCols.fivebyfive).commit();
 			}
 		});		
 
@@ -83,17 +84,17 @@ public class GameSettings extends Activity {
 				((ImageView)v).setAlpha(0xFF);
 				((ImageView)findViewById(R.id.FreeStyleGameMode)).setAlpha(0x4B);
 				
-				mGameSettings.getSettings().freeMode = false;
+				mGameSettings.edit().putBoolean(SettingsCache.FREE_MODE, SettingsCache.GameMode.classic).commit();
 			}
 		});
 		((ImageView)findViewById(R.id.FreeStyleGameMode)).setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				((ImageView)v).setAlpha(0xFF);
-				((ImageView)findViewById(R.id.ClassicGameMode)).setAlpha(0x4B);
-				
-				mGameSettings.getSettings().freeMode = true;
+//				((ImageView)v).setAlpha(0xFF);
+//				((ImageView)findViewById(R.id.ClassicGameMode)).setAlpha(0x4B);
+//				
+//				mGameSettings.edit().putBoolean(SettingsCache.FREE_MODE, SettingsCache.GameMode.freemode).commit();
 			}
 		});
 	}
@@ -107,7 +108,6 @@ public class GameSettings extends Activity {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mGameSettings.updateSettings(mGameSettings.getSettings());
 				mGameSettings = null;
 				finish();
 			}
@@ -115,35 +115,11 @@ public class GameSettings extends Activity {
 		d.show();
 		d = null;
 	}
-	private void cancelAndFinish() {
-		mGameSettings = null;
-		finish();
-	}
 
 	@Override
 	public void onBackPressed() {
 		// Prompt the user to save and or close
-		AlertDialog.Builder d = new AlertDialog.Builder(this);
-		d.setMessage("Save your changes? Any unsaved changes will be lost!");
-		d.setPositiveButton("Yes", new AlertDialog.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// Save the settings and destroy the resource
-				saveSettingsAndFinish();
-			}
-		});
-		
-		// Doesn't save a dang thing
-		d.setNegativeButton("No", new AlertDialog.OnClickListener() {
-		
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				cancelAndFinish();
-			}	
-		});
-		d.show();
-		d = null;
+		saveSettingsAndFinish();
 	}
 
 }

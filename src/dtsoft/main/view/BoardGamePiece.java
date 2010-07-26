@@ -163,11 +163,11 @@ public class BoardGamePiece extends ImageView {
 			color1 = GamePieceColor.Normal.GRADIENT_TOP;
 		} else {
 			if (highlight) {
-				color0 = GamePieceColor.Highlight.GRADIENT_TOP;
-				color1 = GamePieceColor.Highlight.GRADIENT_BOTTOM;
-			} else {
 				color0 = GamePieceColor.Clicked.GRADIENT_TOP;
 				color1 = GamePieceColor.Clicked.GRADIENT_BOTTOM;
+			} else {color0 = GamePieceColor.Highlight.GRADIENT_TOP;
+			color1 = GamePieceColor.Highlight.GRADIENT_BOTTOM;
+
 
 			}
 			mGamePieceGloss = drawRoundedRectangle(null);

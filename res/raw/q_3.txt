@@ -1,0 +1,3 @@
+QAT
+QIS
+QUA

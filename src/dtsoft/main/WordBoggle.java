@@ -1,21 +1,23 @@
 package dtsoft.main;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import dtsoft.main.data.WordsDataHelper;
+import dtsoft.main.data.cache.Settings;
 import dtsoft.main.data.cache.SettingsCache;
 import dtsoft.main.util.BoardGameActions;
 import dtsoft.main.util.GameUtils;
@@ -89,12 +91,18 @@ public class WordBoggle extends Activity {
 	}
 	
 	private void initSettings() {
-		SettingsCache sc = new SettingsCache(super.getCacheDir().getPath() + File.pathSeparator + SettingsCache.SETTINGS_FILE);
-		mGameUtils = new GameUtils(sc.getSettings());
-		sc = null;
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());;
+		Settings s = new Settings();
+		s.gameColumns = sp.getInt(SettingsCache.GAME_COLUMNS, SettingsCache.GameCols.fourbyfour);
+		s.gameMode = sp.getBoolean(SettingsCache.FREE_MODE, SettingsCache.GameMode.classic);
+		if (mGameUtils != null)
+			// destroy the old copy
+			mGameUtils = null;
+		mGameUtils = new GameUtils(s);
 	}
 	
 	public void initBoardGame() {
+		initSettings();
 		mBoardGameActions = null;
 		mBoardGameAdapter = null;
 		
@@ -251,6 +259,7 @@ public class WordBoggle extends Activity {
 					
 					// Destroy the current board
 					initBoardGame();
+					mWordTracker.setText("");
 					getScoreBoard().setText("0");
 					getWordsInBank().clear();
 				}

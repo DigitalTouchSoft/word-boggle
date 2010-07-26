@@ -61,14 +61,8 @@
 	<Button
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
-		android:text="Apply"
-		android:id="@+id/SettingsApply" android:layout_width="100dp"></Button>
-	<Button
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:layout_alignParentRight="true"
-		android:text="Cancel"
-		android:id="@+id/SettingsCancel" android:layout_width="100dp"></Button>
+		android:id="@+id/SettingsApply" android:layout_width="fill_parent" android:text="Back"></Button>
+	
 	<ImageView
 		android:layout_toRightOf="@+id/ClassicGameMode"
 		android:layout_below="@+id/TextView01"

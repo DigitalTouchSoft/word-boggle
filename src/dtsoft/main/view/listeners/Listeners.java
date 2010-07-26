@@ -42,7 +42,12 @@ public class Listeners {
 				WordBoggle wb = (WordBoggle)v.getContext();
 				String word;
 				word = wb.getWordTracker().getText().toString();
-				int wordValue = wb.getBoardGameActions().getWordValue(wb.getWordTracker().getText().toString());
+				if (word == null)
+					return;
+				if (word.length() == 0)
+					return;
+				
+				int wordValue = wb.getBoardGameActions().getWordValue(word);
 	
 				// Only allow words that have not been selected already
 				boolean alreadyInList = false;

@@ -2,7 +2,7 @@ package dtsoft.main.util;
 
 import java.util.Random;
 
-import dtsoft.main.data.cache.SettingsCache.Settings;
+import dtsoft.main.data.cache.Settings;
 import dtsoft.main.view.BoardGamePiece;
 import dtsoft.main.view.adapter.BoardGameAdapter;
 

@@ -28,7 +28,6 @@ public class BoardGameActions {
     	}
     	
     	mAlreadyClicked = new ArrayList<Integer>();
-    	
 	}
 	
 	private void resetBoard(boolean newLetters) {
@@ -101,7 +100,7 @@ public class BoardGameActions {
     }
     
 	public int getWordValue(String word) {
-		if (this.mContext.getWordDatabase().getWordFromCache(word, word.length())) {
+		if (this.mContext.getWordDatabase().getWordFromCache(word)) {
 			return wordValue(word);
 		}
 		return 0;
