@@ -103,7 +103,7 @@ public class GameSettings extends Activity {
 		// Alert the user that the settings will take effect on next restart
 		AlertDialog.Builder d = new AlertDialog.Builder(this);
 		d.setCancelable(false);
-		d.setMessage("Changes will take when you start a new game or restart the application!");
+		d.setMessage("Changes will take effect when you start a new game or restart the application!");
 		d.setPositiveButton("Okay", new AlertDialog.OnClickListener() {
 			
 			@Override
