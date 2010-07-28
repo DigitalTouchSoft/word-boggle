@@ -97,7 +97,14 @@ public class WordsDataHelper {
 	public boolean selectWord(String word) {
 		String tablePrefix = Integer.toString(word.length());
 		String result = null;
-		Cursor cursor = this.mDatabase.query(WORD_TABLE_PREFIX + tablePrefix + "_" + WORD_TABLE, new String[] {WORD}, WORD + "=?", new String[] {word}, null, null, null);
+		Cursor cursor = this.mDatabase.query(
+				WORD_TABLE_PREFIX + tablePrefix + "_" + WORD_TABLE, 
+				new String[] {WORD}, 
+				WORD + " like \""+word+"\"", 
+				null, 
+				null, 
+				null, 
+				null);
 		
 		if (cursor.moveToFirst())
 			do {

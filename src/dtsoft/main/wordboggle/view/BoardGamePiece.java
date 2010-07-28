@@ -79,7 +79,11 @@ public class BoardGamePiece extends ImageView {
 	}
 	
 	public void setLetter(String letter) {
-		this.mLetter = String.valueOf(Character.toUpperCase(letter.charAt(0)));
+		if (letter.length() > 1) {
+			this.mLetter = letter.substring(0, 1).toUpperCase() + letter.substring(1, 2).toLowerCase();
+		} else {
+			this.mLetter = letter.substring(0, 1).toUpperCase();
+		}
 	}
 	
 	@Override
@@ -124,7 +128,7 @@ public class BoardGamePiece extends ImageView {
 				
 				// Set which buttons can be clicked		
 				mContext.getBoardGameActions().highlightOtherGamePieces(getId());
-				mContext.getBoardGameActions().addLetterToWordTracker(getLetter(), getId());
+				mContext.getBoardGameActions().addLetterToWordTracker(getLetter().toUpperCase(), getId());
 				
 				// Change the image resource
 				makeHighlight(false, false);
@@ -346,7 +350,7 @@ public class BoardGamePiece extends ImageView {
 		float textHeight = Math.abs((float)textBounds.top);
 		float kern = Math.abs(mLetterPaint.ascent());
 		
-		canvas.drawText(mLetter.toUpperCase(), mX, mY + (textHeight - (kern - textHeight)), mLetterPaint);
+		canvas.drawText(mLetter, mX, mY + (textHeight - (kern - textHeight)), mLetterPaint);
 		canvas.drawText("x" + Alphas.getLetterValue(mLetter), drawingRect.bottom - this.getPaddingBottom() - scoreBounds.width(), drawingRect.right - this.getPaddingRight(), mScorePaint);
 		super.invalidate();
 	}
