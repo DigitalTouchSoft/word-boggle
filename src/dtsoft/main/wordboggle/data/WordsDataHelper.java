@@ -1,4 +1,4 @@
-package dtsoft.main.data;
+package dtsoft.main.wordboggle.data;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import dtsoft.main.R;
+import dtsoft.main.wordboggle.R;
 
 public class WordsDataHelper {
 

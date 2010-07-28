@@ -1,4 +1,4 @@
-package dtsoft.main.view.adapter;
+package dtsoft.main.wordboggle.view.adapter;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.widget.ImageView.ScaleType;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import dtsoft.main.R;
-import dtsoft.main.WordBoggle;
-import dtsoft.main.util.GameUtils;
-import dtsoft.main.view.BoardGamePiece;
+import dtsoft.main.wordboggle.R;
+import dtsoft.main.wordboggle.WordBoggle;
+import dtsoft.main.wordboggle.view.BoardGamePiece;
 
 public class BoardGameAdapter {
 	private WordBoggle mContext;

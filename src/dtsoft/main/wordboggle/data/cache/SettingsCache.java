@@ -1,4 +1,4 @@
-package dtsoft.main.data.cache;
+package dtsoft.main.wordboggle.data.cache;
 
 
 /**

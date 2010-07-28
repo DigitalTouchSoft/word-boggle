@@ -1,4 +1,4 @@
-package dtsoft.main;
+package dtsoft.main.wordboggle;
 
 import android.app.Activity;
 import android.media.AudioManager;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import dtsoft.main.data.WordsDataHelper;
+import dtsoft.main.wordboggle.data.WordsDataHelper;
 
 public class WordsFoundList extends Activity {
 	@Override

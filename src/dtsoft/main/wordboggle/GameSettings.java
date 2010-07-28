@@ -1,4 +1,4 @@
-package dtsoft.main;
+package dtsoft.main.wordboggle;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import dtsoft.main.data.cache.SettingsCache;
+import dtsoft.main.wordboggle.data.cache.SettingsCache;
 
 public class GameSettings extends Activity {
 	

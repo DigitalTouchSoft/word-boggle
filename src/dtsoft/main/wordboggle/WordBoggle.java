@@ -1,4 +1,4 @@
-package dtsoft.main;
+package dtsoft.main.wordboggle;
 
 import java.util.ArrayList;
 
@@ -16,15 +16,15 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import dtsoft.main.data.WordsDataHelper;
-import dtsoft.main.data.cache.Settings;
-import dtsoft.main.data.cache.SettingsCache;
-import dtsoft.main.util.BoardGameActions;
-import dtsoft.main.util.GameUtils;
-import dtsoft.main.util.sound.AudioProvider;
-import dtsoft.main.view.BoardGamePiece;
-import dtsoft.main.view.adapter.BoardGameAdapter;
-import dtsoft.main.view.listeners.Listeners;
+import dtsoft.main.wordboggle.data.WordsDataHelper;
+import dtsoft.main.wordboggle.data.cache.Settings;
+import dtsoft.main.wordboggle.data.cache.SettingsCache;
+import dtsoft.main.wordboggle.util.BoardGameActions;
+import dtsoft.main.wordboggle.util.GameUtils;
+import dtsoft.main.wordboggle.util.sound.AudioProvider;
+import dtsoft.main.wordboggle.view.BoardGamePiece;
+import dtsoft.main.wordboggle.view.adapter.BoardGameAdapter;
+import dtsoft.main.wordboggle.view.listeners.Listeners;
 
 public class WordBoggle extends Activity {
 	private	ArrayList<Integer> mAlreadyClicked = new ArrayList<Integer>();
