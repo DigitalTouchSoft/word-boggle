@@ -1,7 +1,5 @@
 package dtsoft.main.view.listeners;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,7 +42,7 @@ public class Listeners {
 				word = wb.getWordTracker().getText().toString();
 				if (word == null)
 					return;
-				if (word.length() == 0)
+				if (word.length() <= 1)
 					return;
 				
 				int wordValue = wb.getBoardGameActions().getWordValue(word);
