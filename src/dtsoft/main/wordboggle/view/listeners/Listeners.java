@@ -1,6 +1,5 @@
 package dtsoft.main.wordboggle.view.listeners;
 
-import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -35,7 +34,6 @@ public class Listeners {
 	
 	public OnClickListener submitWordClick() {
 		return new OnClickListener() {
-			
 			public void onClick(View v) {
 				WordBoggle wb = (WordBoggle)v.getContext();
 				String word;
@@ -63,19 +61,12 @@ public class Listeners {
 					
 					wb.getScoreBoard().setText(String.valueOf(score));
 					wb.getBoardGameActions().resetGameBoard(false, true);
-					
-					this.setupWord(word, wordValue, v.getContext());
+					wb.getWordsInBank().add(word + "\t-\t" + Integer.toString(wordValue));
 					wb.getAudioProvider().playSounds(new int[] {AudioProvider.GOOD_WORD_SUBMITED});
 				} else {
 					wb.getAudioProvider().playSounds(new int[] {AudioProvider.BAD_WORD_SUBMITED});
 				}
 			}
-			
-			private void setupWord(String word, int value, Context context) {
-				WordBoggle wb = (WordBoggle) context;
-				wb.getWordsInBank().add(word + "\t-\t" + Integer.toString(value));
-			}
-			
 		};
 	}
 	
