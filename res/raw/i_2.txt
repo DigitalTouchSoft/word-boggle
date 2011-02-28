@@ -1,6 +1,0 @@
-ID
-IF
-IN
-IO
-IS
-IT
