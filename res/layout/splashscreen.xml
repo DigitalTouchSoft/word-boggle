@@ -13,17 +13,7 @@
 		android:src="@drawable/logo204x75"
 		android:drawingCacheQuality="high"
 		android:scaleType="center" />
-	<TextView
-		android:id="@+id/WordProgressBarText"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_below="@+id/SplashScreen"
-		android:text="Loading word database for first time use..." />
-	<ProgressBar
-		android:id="@+id/WordProgressBar"
-		android:layout_height="wrap_content"
-		android:layout_width="wrap_content"
-		android:layout_centerHorizontal="true"
-		android:layout_below="@+id/WordProgressBarText"/>
+	
+	
+
 </RelativeLayout>

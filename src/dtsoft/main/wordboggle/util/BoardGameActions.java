@@ -80,7 +80,6 @@ public class BoardGameActions {
 		mContext.getWordTracker().setText(mContext.getWordTracker().getText().subSequence(0 ,
 														mContext.getWordTracker().getText().length() - 1));
 		mAlreadyClicked.remove(mAlreadyClicked.size() - 1);
-		
 		if (mAlreadyClicked.size() > 0) {
 			this.highlightOtherGamePieces(mAlreadyClicked.get(mAlreadyClicked.size() -1));
 		} else {
@@ -100,7 +99,7 @@ public class BoardGameActions {
     }
     
 	public int getWordValue(String word) {
-		if (this.mContext.getWordDatabase().getWordFromCache(word)) {
+		if (this.mContext.getWordDatabase().checkWord(word)) {
 			return wordValue(word);
 		}
 		return 0;
