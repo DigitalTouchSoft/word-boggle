@@ -1,10 +1,10 @@
 package dtsoft.main.wordboggle.data;
 
 import java.io.BufferedInputStream;
-import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +13,7 @@ import dtsoft.main.wordboggle.R;
 
 public class WordsDataHelper {
 	private byte[] mWords;
+	private int[] mHashedWords;
 	private Context mContext;
 	public static ArrayAdapter<String> WORDS_FOUND;
 	
@@ -22,48 +23,83 @@ public class WordsDataHelper {
 	}
 	
 	public boolean checkWord(String word) { 
-		return true;
-		//Arrays.binarySearch(mWords, word.hashCode());
+		if (Arrays.binarySearch(mHashedWords, word.hashCode()) >= 0) { 
+			return true;
+		}
+		return false;
 	}
 
 	private void loadWords() { 
-			DataInputStream hashedWords = null;
-			InputStream words = mContext.getResources().openRawResource(R.raw.sorted_hashwords);
-			Log.i("WordsDataHelper", "Loading Sorted Dictionary! sortedhashwords.txt");
-			int available = 0;
-			try {
-				available = words.available();
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			BufferedInputStream br = new BufferedInputStream(words, available);
-			
-			//hashedWords = new DataInputStream(words);
-			mWords = new byte[available];
-
-			Log.i("WordsDataHelper", "Loading: "+ (mWords.length));
-			Log.i("WordsDataHelper", "Loading the: hashed words files" );
-			
-			long start = System.currentTimeMillis();
-			try {
-				br.read(mWords);
-			} catch (EOFException e) {
-			} catch (IOException e) {
-			}
-			long end = System.currentTimeMillis();
-			long diff = end - start;
-			Log.i ("WordsDataHelper", "Took: " + diff + "m to complete");
-			
-			Log.i("WordsDataHelper", "Finished loading the sorted hash words!");
-
-			try { 
-				br.close();
-			} catch (IOException e) {
-				// Do nothing
-			}
+		InputStream words = mContext.getResources().openRawResource(R.raw.sorted_hashwords);
+		Log.i("WordsDataHelper", "Loading Sorted Dictionary! sortedhashwords.txt");
+		int available = 0;
+		try {
+			available = words.available();
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
 		}
+
+		BufferedInputStream br = new BufferedInputStream(words, available);
+		
+		//mHashedWords = new DataInputStream(words);
+		mWords = new byte[available];
+		mHashedWords = new int[available/4];
+	
+		Log.i("WordsDataHelper", "Loading: "+ (mWords.length));
+		Log.i("WordsDataHelper", "Loading the: hashed words files" );
+		
+		long start = System.currentTimeMillis();
+		try {
+			br.read(mWords);
+		} catch (EOFException e) {
+		} catch (IOException e) {
+		}
+		long end = System.currentTimeMillis();
+		long diff = end - start;
+		Log.i ("WordsDataHelper", "Took: " + diff + "m to complete");
+		
+		Log.i("WordsDataHelper", "Finished loading the sorted hash words!");
+	
+		try { 
+			br.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		
+		convertByteArrayToInt32(mWords, mHashedWords);
 	}
+	
+	private void convertByteArrayToInt32(byte[] bytes, int[] hashes) {
+		int h = 0;
+		int c = 0;
+		byte[] highByte = new byte[2];
+		byte[] lowByte = new byte[2];
+		while (h < hashes.length) {
+			c = h * 4;
+			
+			try { 
+				highByte[0] = bytes[c];
+				highByte[1] = bytes[c+1];
+				lowByte[0] = bytes[c+2];
+				lowByte[1] = bytes[c+3];
+			} catch (ArrayIndexOutOfBoundsException e) {
+				Log.e("WordsDataHelper", "Array index out of bounds index: " + c + " hash index: " + h);
+			}
+			
+			hashes[h] = (unsignedByteToInt(highByte[0]) << 24) | unsignedByteToInt(highByte[1]) << 16;
+			hashes[h] = hashes[h] | ((unsignedByteToInt(lowByte[0]) << 8) | unsignedByteToInt(lowByte[1]));
+			
+			h++;
+		}
+		
+		Arrays.sort(hashes);
+	}
+	
+	 public static int unsignedByteToInt(byte b) {
+	    return (int) b & 0xFF;
+	    }
+}
 
  /*	private static class WordsOpenHelper extends SQLiteOpenHelper {
 
