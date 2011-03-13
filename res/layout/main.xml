@@ -25,7 +25,7 @@
 		android:layout_height="wrap_content"
 		android:textColor="#000000"
 		android:background="@drawable/scoreboard" android:textSize="28dp"/>
-	<TextView
+	<dtsoft.main.wordboggle.view.BoardGameButton
 		android:layout_height="wrap_content"
 		android:id="@+id/WordTracker"
 		android:layout_width="fill_parent"
@@ -35,7 +35,7 @@
 		android:layout_alignParentLeft="true"
 		android:clickable="true"
 		android:textColor="#000000"
-		android:background="@drawable/scoreboard" android:textSize="22dp"/>
+		android:textSize="22dp"/>
 	<Button
 		android:layout_height="wrap_content"
 		android:id="@+id/CancelWord"

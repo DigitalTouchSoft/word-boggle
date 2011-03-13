@@ -351,7 +351,7 @@ public class BoardGamePiece extends ImageView {
 		float kern = Math.abs(mLetterPaint.ascent());
 		
 		canvas.drawText(mLetter, mX, mY + (textHeight - (kern - textHeight)), mLetterPaint);
-		canvas.drawText("x" + Alphas.getLetterValue(mLetter), drawingRect.bottom - this.getPaddingBottom() - scoreBounds.width(), drawingRect.right - this.getPaddingRight(), mScorePaint);
+		// canvas.drawText("x" + Alphas.getLetterValue(mLetter), drawingRect.bottom - this.getPaddingBottom() - scoreBounds.width(), drawingRect.right - this.getPaddingRight(), mScorePaint);
 		super.invalidate();
 	}
 	
