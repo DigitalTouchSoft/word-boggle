@@ -5,27 +5,22 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
-import android.graphics.Path;
-import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Shader.TileMode;
 import android.graphics.Typeface;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.PathShape;
-import android.graphics.drawable.shapes.RectShape;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import dtsoft.main.wordboggle.R;
 import dtsoft.main.wordboggle.WordBoggle;
-import dtsoft.main.wordboggle.util.Alphas;
 import dtsoft.main.wordboggle.util.sound.AudioProvider;
 import dtsoft.main.wordboggle.view.CustomColors.GamePieceColor;
+import dtsoft.util.drawable.InsetBorders;
+import dtsoft.util.drawable.InsetBounds;
+import dtsoft.util.drawable.QuickDraw;
 
 public class BoardGamePiece extends ImageView {
 	
@@ -42,11 +37,7 @@ public class BoardGamePiece extends ImageView {
 	private ShapeDrawable mGamePiece;
 	private ShapeDrawable mGamePieceGloss;
 	private ShapeDrawable mInset;
-	private ShapeDrawable mInsetLeft;
-	private ShapeDrawable mInsetBottom;
-	private ShapeDrawable mInsetRight;
-	private ShapeDrawable mInsetTop;
-	private static float[] ROUNDED_CORNERS = new float[] { 12, 12, 12, 12, 12, 12, 12, 12 };
+	private InsetBorders mInsetBorders; 
 	
 	public BoardGamePiece(Context context) {
 		super(context);
@@ -155,8 +146,8 @@ public class BoardGamePiece extends ImageView {
 	 * @param reset
 	 */
 	private void makeHighlight(boolean highlight, boolean reset) {
-		Rect d = new Rect(); 
-		super.getDrawingRect(d);
+		Rect drawingRect = new Rect(); 
+		super.getDrawingRect(drawingRect);
 		
 		int color0 = 0;
 		int color1 = 0;
@@ -174,14 +165,18 @@ public class BoardGamePiece extends ImageView {
 
 
 			}
-			mGamePieceGloss = drawRoundedRectangle(null);
+			mGamePieceGloss = QuickDraw.drawRoundRectangle(
+					drawingRect.left + super.getPaddingLeft(), 
+					drawingRect.top + super.getPaddingTop(), 
+					drawingRect.right - super.getPaddingRight(), 
+					drawingRect.bottom - super.getPaddingBottom(),
+					null);
 			Rect r = mGamePieceGloss.copyBounds();
 			mGamePieceGloss.setBounds(r.left, r.top, r.right, r.bottom /2);
 			mGamePieceGloss.getPaint().setColor(0x44FFFFFF);
 		}
-
-		LinearGradient background = new LinearGradient(0, 0, 0, d.height(), color0, color1, TileMode.MIRROR);
-		this.mGamePiece.getPaint().setShader(background);
+		
+		QuickDraw.colorShapeLinear(color0, color1, mGamePiece, drawingRect);
 	}
 	
 	/**
@@ -192,113 +187,6 @@ public class BoardGamePiece extends ImageView {
 		mUnClickable = true;
 	}
 
-	/**
-	 * Draws and returns a rounded rectangle using the standard shit i setup
-	 * @param inset
-	 * If you want a fucking inset, use this shit
-	 * @return
-	 * a fucking rectangle
-	 */
-	private ShapeDrawable drawRoundedRectangle(RectF inset) {
-		RoundRectShape rrs = new RoundRectShape(ROUNDED_CORNERS, inset, null);
-		ShapeDrawable roundedRect = new ShapeDrawable(rrs);
-		
-		Rect drawingRect = new Rect(); 
-		super.getDrawingRect(drawingRect);
-		roundedRect.setBounds(
-				drawingRect.left + super.getPaddingLeft(), 
-				drawingRect.top + super.getPaddingTop(), 
-				drawingRect.right - super.getPaddingRight(), 
-				drawingRect.bottom - super.getPaddingBottom());
-		roundedRect.getPaint().setAntiAlias(true);
-		roundedRect.getPaint().setDither(true);		
-		
-		return roundedRect;
-	}
-	
-	private void drawInset(Rect drawingRect, float insetBuffer) {
-		RectShape rs = new RectShape();
-		mInset = new ShapeDrawable(rs);
-		mInset.setBounds(
-				(int)(drawingRect.left + super.getPaddingLeft() + insetBuffer), 
-				(int)(drawingRect.top + super.getPaddingTop() + insetBuffer), 
-				(int)(drawingRect.right - super.getPaddingRight() - insetBuffer), 
-				(int)(drawingRect.bottom - super.getPaddingBottom() -insetBuffer));
-		mInset.getPaint().setAntiAlias(true);
-		mInset.getPaint().setDither(true);
-		mInset.getPaint().setShader(new RadialGradient(
-				mInset.getBounds().width(), 
-				mInset.getBounds().height(), 
-				(float) Math.sqrt(Math.pow(mInset.getBounds().width(), 2) + Math.pow(mInset.getBounds().height(), 2)), 
-				CustomColors.GamePieceColor.Inset.GRADIENT_BOTTOM, 
-				CustomColors.GamePieceColor.Inset.GRADIENT_TOP, 
-				TileMode.MIRROR));
-		
-		InsetBounds insetBounds = new InsetBounds();
-		insetBounds.x = mInset.getBounds().centerX();
-		insetBounds.y = mInset.getBounds().centerY();
-		insetBounds.bottom = mInset.getBounds().bottom;
-		insetBounds.top = mInset.getBounds().top;
-		insetBounds.left = mInset.getBounds().left;
-		insetBounds.right = mInset.getBounds().right;
-		insetBounds.width = mInset.getBounds().width();
-		insetBounds.height = mInset.getBounds().height();
-		
-		drawInsetBorder(insetBounds);
-	}
-	
-	private void drawInsetBorder(InsetBounds bounds) {
-		float borderWidth = 1.25f;
-		Path left = new Path();
-		Path right = new Path();
-		Path top = new Path();
-		Path bottom = new Path();
-		
-		left.moveTo(0, bounds.height);
-		left.lineTo(0, 0);
-		left.lineTo(borderWidth, 0);
-		left.lineTo(borderWidth, bounds.height);
-		left.close();
-		
-		top.moveTo(0, 0);
-		top.lineTo(bounds.width, 0);
-		top.lineTo(bounds.width, borderWidth);
-		top.lineTo(0,borderWidth);
-		top.close();
-		
-		right.moveTo(bounds.width,bounds.height);
-		right.lineTo(bounds.width, 0);
-		right.lineTo(bounds.height - borderWidth, 0);
-		right.lineTo(bounds.height - borderWidth, bounds.height);
-		right.close();
-		
-		bottom.moveTo(0, mInset.getBounds().height());
-		bottom.lineTo(bounds.width,mInset.getBounds().height());
-		bottom.lineTo(bounds.width,mInset.getBounds().height() - borderWidth);
-		bottom.lineTo(0, mInset.getBounds().height() - borderWidth);
-		bottom.close();
-		
-		
-		mInsetLeft = new ShapeDrawable(new PathShape(left,bounds.width, bounds.height));
-		mInsetTop = new ShapeDrawable(new PathShape(top, bounds.width, bounds.height));
-		mInsetRight = new ShapeDrawable(new PathShape(right, bounds.width, bounds.height));
-		mInsetBottom = new ShapeDrawable(new PathShape(bottom, bounds.width, bounds.height));
-		
-		Rect b = mInset.copyBounds();
-		
-		mInsetBottom.getPaint().setColor(0x88FEFEFE);
-		mInsetBottom.setBounds(b);
-		
-		mInsetRight.getPaint().setColor(0x88FEFEFE);
-		mInsetRight.setBounds(b);
-		
-		mInsetTop.getPaint().setColor(0x88373737);
-		mInsetTop.setBounds(b);
-		
-		mInsetLeft.getPaint().setColor(0x88373737);
-		mInsetLeft.setBounds(b);
-	}
-	
 	private void drawOnce(Canvas canvas) {
 		Rect drawingRect = new Rect(); 
 		super.getDrawingRect(drawingRect);
@@ -326,24 +214,51 @@ public class BoardGamePiece extends ImageView {
 		if (mGamePiece == null) {
 			float insetBuffer = (float) Math.ceil((float) (drawingRect.width() *  0.20));
 			RectF inset = new RectF(insetBuffer, insetBuffer, insetBuffer, insetBuffer);
-			mGamePiece = drawRoundedRectangle(inset);
+			
+			mGamePiece = QuickDraw.drawRoundRectangle(
+					drawingRect.left + super.getPaddingLeft(), 
+					drawingRect.top + super.getPaddingTop(), 
+					drawingRect.right - super.getPaddingRight(), 
+					drawingRect.bottom - super.getPaddingBottom(),
+					inset);
 			makeHighlight(false, true);
-			this.drawInset(drawingRect, insetBuffer);
+			// this.drawInset(drawingRect, insetBuffer);
+			
+			// Draw the inset for this shit
+			mInset = QuickDraw.drawInset(
+					drawingRect, 
+					GamePieceColor.Inset.GRADIENT_TOP, 
+					GamePieceColor.Inset.GRADIENT_BOTTOM, 
+					super.getPaddingLeft(), 
+					super.getPaddingTop(), 
+					super.getPaddingRight(), 
+					super.getPaddingBottom(),
+					insetBuffer, 
+					insetBuffer);
+			
+			InsetBounds insetBounds = new InsetBounds();
+			insetBounds.x = mInset.getBounds().centerX();
+			insetBounds.y = mInset.getBounds().centerY();
+			insetBounds.bottom = mInset.getBounds().bottom;
+			insetBounds.top = mInset.getBounds().top;
+			insetBounds.left = mInset.getBounds().left;
+			insetBounds.right = mInset.getBounds().right;
+			insetBounds.width = mInset.getBounds().width();
+			insetBounds.height = mInset.getBounds().height();
+			
+			mInsetBorders = QuickDraw.drawInsetBorder(mInset, insetBounds);
 		}
-
+		
 		mInset.draw(canvas);
-		mInsetRight.draw(canvas);
-		mInsetTop.draw(canvas);
-		mInsetBottom.draw(canvas);
-		mInsetLeft.draw(canvas);
 		mGamePiece.draw(canvas);
+		mInsetBorders.getInsetBottom().draw(canvas);
+		mInsetBorders.getInsetTop().draw(canvas);
+		mInsetBorders.getInsetRight().draw(canvas);
+		mInsetBorders.getInsetLeft().draw(canvas);
 		
 		if (mGamePieceGloss != null) {
 			mGamePieceGloss.draw(canvas);
 		}
-		
-		Rect scoreBounds = new Rect();
-		mScorePaint.getTextBounds("x" + Alphas.getLetterValue(mLetter),0, ("x" + Alphas.getLetterValue(mLetter)).length(), scoreBounds);
 		
 		Rect textBounds = new Rect();
 		mLetterPaint.getTextBounds(mLetter, 0, 1, textBounds);
@@ -351,7 +266,6 @@ public class BoardGamePiece extends ImageView {
 		float kern = Math.abs(mLetterPaint.ascent());
 		
 		canvas.drawText(mLetter, mX, mY + (textHeight - (kern - textHeight)), mLetterPaint);
-		// canvas.drawText("x" + Alphas.getLetterValue(mLetter), drawingRect.bottom - this.getPaddingBottom() - scoreBounds.width(), drawingRect.right - this.getPaddingRight(), mScorePaint);
 		super.invalidate();
 	}
 	
@@ -362,10 +276,6 @@ public class BoardGamePiece extends ImageView {
 		mLetterPaint = null;
 		mScorePaint = null;
 		mInset = null;
-		mInsetBottom = null;
-		mInsetLeft = null;
-		mInsetRight = null;
-		mInsetTop = null;
 		mGamePiece = null;
 		mGamePieceGloss = null;
 		
@@ -379,9 +289,4 @@ public class BoardGamePiece extends ImageView {
 		makeHighlight(false, true);
 		super.invalidate();
 	}
-	
-	public class InsetBounds {
-		public int x, y, left, right, top, bottom, width, height;
-	}
-	
 }

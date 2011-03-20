@@ -107,16 +107,15 @@ public class BoardGameActions {
 	
 	private int wordValue(String word) {
 		int value = 0;
-		char[] wordSplit = word.toCharArray();
+		int wordLen = word.length();
+		if (wordLen > 8) { wordLen = 8; }
+		if (wordLen < 2 || wordLen == 0) { return 0; };
 		
-		// Step through all of the letters and obtain the associated score for each letter 
-		for (char letter : wordSplit) {
-			for (int i = 0; i < 26; i++){ 
-				if (Alphas.TRUE_ALPHAS[i].equalsIgnoreCase(Character.toString(letter))) {
-					value += Alphas.ALPHASCORES[i];
-				}
-			}
+		for (int c = 0; c <= Alphas.ALPHASCORES.length; c++) {
+			if (Alphas.ALPHASCORES[c][0] == wordLen)
+				return Alphas.ALPHASCORES[c][1];
 		}
+		
 		return value;
 	}
 }

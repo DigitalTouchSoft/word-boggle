@@ -18,14 +18,7 @@ public class Alphas {
 		"q", "r", "s", 
 		"t", "v", "w", 
 		"x", "z" };	
-	public static final int[] ALPHASCORES = new int[] {
-		10, 30, 30, 20,
-		10, 40, 20, 40,
-		10, 80, 50, 10,
-		30, 10, 10, 30,
-		100, 10, 10, 10,
-		10, 40, 40, 80,
-		40, 100 };
+	public static final int[][] ALPHASCORES = new int[][] { {3, 1}, {4, 1}, {5, 2}, {6, 3}, {7, 5}, {8, 11} };
 	
 	public static boolean isConsonant(String letter) {
 		for(String con: CONSONANT) {
@@ -33,14 +26,6 @@ public class Alphas {
 				return true;
 		}
 		return false;
-	}
-	
-	public static int getLetterValue(String letter) {
-		for(int i = 0; i < TRUE_ALPHAS.length; i++) {
-			if (letter.equalsIgnoreCase(TRUE_ALPHAS[i]))
-				return ALPHASCORES[i];
-		}
-		return 0;
 	}
 	
 	public static class WeightedAlphas {
@@ -65,6 +50,7 @@ public class Alphas {
 			"W", 	"W", 	"W", 	"W", 	"W", 	"W", 	"W", 	"W", 	
 			"V", 	"V", 	"V", 	"V", 	"V", 	"V", 	"V", 	"V", 	"V", 	"V", 	
 			"Qu", 	"Qu", 	
+			"Q", 	"Q",
 			"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	"P", 	
 			"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	"S", 	
 			"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	"R", 	

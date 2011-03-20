@@ -116,7 +116,7 @@ public class WordBoggle extends Activity {
 	protected void onResume() {
 		super.onResume();
 		mAudioProvider = new AudioProvider(this);
-		// mWordDatabase = new WordsDataHelper(this);
+		mWordDatabase = new WordsDataHelper(this);
 	}
 	
 	@Override

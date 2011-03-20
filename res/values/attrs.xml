@@ -3,4 +3,8 @@
 	<declare-styleable name="BoardGamePiece">
 		<attr name="letter" format="string" />
 	</declare-styleable>
+	<declare-styleable name="BoardGameButton">
+		<attr name="inset" format="string" />
+	</declare-styleable>
+	
 </resources>

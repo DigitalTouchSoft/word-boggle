@@ -23,6 +23,7 @@ public class WordsDataHelper {
 	}
 	
 	public boolean checkWord(String word) { 
+		Log.i("WordsDataHelper", "Checking word: " + word + " with hash: " + word.hashCode());
 		if (Arrays.binarySearch(mHashedWords, word.hashCode()) >= 0) { 
 			return true;
 		}

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:wb="http://schemas.android.com/apk/res/dtsoft.main.wordboggle"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent"
 	android:background="@drawable/backgroundgradient">
@@ -17,15 +18,25 @@
 			android:layout_height="fill_parent"
 			android:layout_width="fill_parent" />
 	</ScrollView>
-	<TextView
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		wb:inset = "true"
 		android:id="@+id/ScoreBoard"
 		android:layout_width="fill_parent"
 		android:text="0"
 		android:gravity="center"
 		android:layout_height="wrap_content"
 		android:textColor="#000000"
-		android:background="@drawable/scoreboard" android:textSize="28dp"/>
+		android:textSize="28dp"/>
 	<dtsoft.main.wordboggle.view.BoardGameButton
+		wb:inset="true"
+		android:id="@+id/Timer"
+		android:layout_width="wrap_content"
+		android:text="3:00"
+		android:gravity="center"
+		android:textColor="#000000"
+		android:textSize="28dp"/>
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		wb:inset = "true"
 		android:layout_height="wrap_content"
 		android:id="@+id/WordTracker"
 		android:layout_width="fill_parent"
@@ -35,13 +46,16 @@
 		android:layout_alignParentLeft="true"
 		android:clickable="true"
 		android:textColor="#000000"
-		android:textSize="22dp"/>
-	<Button
+		android:textSize="20dp"/>
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		wb:inset="false"
 		android:layout_height="wrap_content"
 		android:id="@+id/CancelWord"
-		android:text="Cancel Selection"
+		android:text="Cancel"
 		android:layout_alignParentBottom="true"
 		android:layout_width="wrap_content"
 		android:layout_toLeftOf="@+id/NewGame"
-		android:layout_alignParentRight="true" android:background="@drawable/button" android:textColor="#FFFFFFFF"/>
+		android:layout_alignParentRight="true" 
+		android:textColor="#FFFFFF"
+		android:textSize="20dp"/>
 </RelativeLayout>
