@@ -24,6 +24,6 @@ public class SplashScreen extends Activity {
 	
 	private void startNextActivity() {
 		finish();
-		startActivity(new Intent("dtsoft.main.wordboggle.WordBoggle"));
+		startActivity(new Intent("dtsoft.main.wordboggle.WelcomeScreen"));
 	}
 }

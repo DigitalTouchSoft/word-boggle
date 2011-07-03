@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/backgroundgradient"
+	android:orientation="vertical">
+	<ImageView
+		android:id="@+id/imageView1"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_width="match_parent"
+		android:src="@drawable/gamelogo"
+		android:layout_marginTop="50dp"></ImageView>
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#FFFFFF"
+		android:text="New Game"
+		android:id="@+id/NewGame"
+		android:layout_centerHorizontal="true"
+		android:layout_centerVertical="true" />
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#FFFFFF"
+		android:text="Continue"
+		android:id="@+id/ContinueGame"
+		android:layout_below="@+id/NewGame"/>
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:textColor="#FFFFFF"
+		android:text="Settings"
+		android:id="@+id/Settings"
+		android:layout_below="@+id/ContinueGame"/>
+	<dtsoft.main.wordboggle.view.BoardGameButton
+		android:layout_width="fill_parent"
+		android:textColor="#FFFFFF"
+		android:layout_height="wrap_content"
+		android:text="High Scores"
+		android:id="@+id/HighScores"
+		android:layout_below="@+id/Settings"/>
 </RelativeLayout>

@@ -31,6 +31,17 @@
 			</intent-filter>
 		</activity>
 		<activity
+			android:configChanges="orientation|keyboardHidden|keyboard"
+			android:screenOrientation="portrait"
+			android:name=".WelcomeScreen">
+			<intent-filter>
+				<action
+					android:name="dtsoft.main.wordboggle.WelcomeScreen" />
+				<category
+					android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity
 			android:screenOrientation="portrait"
 			android:name=".WordsFoundList" />
 		<activity

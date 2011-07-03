@@ -26,15 +26,20 @@
 		android:gravity="center"
 		android:layout_height="wrap_content"
 		android:textColor="#000000"
-		android:textSize="28dp"/>
+		android:layout_alignParentLeft="true"
+		android:layout_toLeftOf="@+id/Timer"
+		android:textSize="26dp"/>
 	<dtsoft.main.wordboggle.view.BoardGameButton
-		wb:inset="true"
+		wb:inset="false"
 		android:id="@+id/Timer"
 		android:layout_width="wrap_content"
-		android:text="3:00"
+		android:text="  3:00  "
 		android:gravity="center"
-		android:textColor="#000000"
-		android:textSize="28dp"/>
+		android:layout_height="wrap_content"
+		android:textColor="#FFFFFF"
+		android:textSize="26dp"
+		android:layout_alignParentRight="true"
+		android:layout_toLeftOf="@+id/NewGame"/>
 	<dtsoft.main.wordboggle.view.BoardGameButton
 		wb:inset = "true"
 		android:layout_height="wrap_content"
@@ -44,7 +49,6 @@
 		android:layout_toLeftOf="@+id/CancelWord"
 		android:layout_alignParentBottom="true"
 		android:layout_alignParentLeft="true"
-		android:clickable="true"
 		android:textColor="#000000"
 		android:textSize="20dp"/>
 	<dtsoft.main.wordboggle.view.BoardGameButton
